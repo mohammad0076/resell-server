@@ -42,6 +42,7 @@ async function run() {
         const bookngcollection = client.db('oobbss').collection('booking');
         const usercollection = client.db('oobbss').collection('userss');
         const addcollection = client.db('oobbss').collection('addaproduct');
+        const addcollections = client.db('oobbss').collection('addaproducts');
 
 
 
@@ -167,6 +168,13 @@ async function run() {
             const result = await addcollection.find(query).toArray();
             res.send(result);
         })
+        app.post('/advertize', async (req, res) => {
+            const add = req.body;
+            const result = await addcollections.insertOne(add);
+            res.send(result);
+        });
+
+
         app.get('/addedbook/:id', async (req, res) => {
             const id = req.params.id;
             const filter = { _id: ObjectId(id) }
